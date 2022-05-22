@@ -40,6 +40,24 @@ class NoteAddUpdateActivity : AppCompatActivity() {
         } else {
             note = Note()
         }
+        val actionBarTitle: String
+        val btnTitle: String
+        if (isEdit) {
+            actionBarTitle = getString(R.string.change)
+            btnTitle = getString(R.string.update)
+            if (note != null) {
+                note?.let { note ->
+                    binding?.edtTitle?.setText(note.title)
+                    binding?.edtDescription?.setText(note.description)
+                }
+            }
+        } else {
+            actionBarTitle = getString(R.string.add)
+            btnTitle = getString(R.string.save)
+        }
+        supportActionBar?.title = actionBarTitle
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        binding?.btnSubmit?.text = btnTitle
 
         binding?.btnSubmit?.setOnClickListener {
             val title = binding?.edtTitle?.text.toString().trim()
